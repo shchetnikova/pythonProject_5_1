@@ -59,7 +59,12 @@ def delete_user_by_id(user_id):
     cursor.execute("""DELETE FROM users WHERE id = ?""", (user_id,))
     conn.commit()
     conn.close()
-
+def delete_user_by_name(name):
+    conn = sqlite3.connect('users')
+    cursor = conn.cursor()
+    cursor.execute("""DELETE FROM users WHERE name = ?""", (name,))
+    conn.commit()
+    conn.close()
 def main():
     create_table_users()
     #добавляем пользователей
@@ -78,6 +83,11 @@ def main():
  #выводим всех пользователей после удаления
     print("Все пользователи после удаления:")
     get_all_users()
+    delete_user_by_name('Артем Артемов')
+    print("Все пользователи после удаления:")
+    get_all_users()
+
+
 
 #проверяет, запущен ли скрипт непосредственно (как главный модуль),
 #или он был импортирован как модуль в другой скрипт.
